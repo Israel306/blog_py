@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div>
+                aul blog
+            </div>
+
+            <ul>
+                <li>Home</li>
+                <li><button><a href="signup"> Signup | in </a></button></li>
+                <li><button><a href="signout"> Log out </a></button></li>
+            </ul>
+        </nav>
+
+        
+        {% if user.is_authenticated %}
+        <h1>Welcome To AUL blog {{user.username}}</h1>
+        {% endif %}
+
+
+    </header>
+    <section>
+        {% for post in posts reversed%}
+        <div class="card">
+           <a style = "text-decoration: none; color: black;" href = "/post/{{post.id}}">
+            <article>
+                <h1>
+                    {{post.title}}
+                </h1>
+
+                <p><b><i>{{post.created_at}}</i></b></p>
+                <br>
+                <p>{{post.body|truncatewords:10 }}</p>
+                <br>
+            </article>
+        </a>    
+        </div>
+        {% endfor %}
+
+    </section>
+</body>
+
+</html>
